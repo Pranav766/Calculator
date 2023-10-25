@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #calculator {
+            width: 300px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 2px 2px 5px #888;
+        }
+
+        #display-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #display {
+            text-align: right;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            flex: 1;
+        }
+
+        #ac-button {
+            flex: 0;
+            margin-left: 10px;
+        }
+
+        #buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #ac-button button {
+            background-color: aqua;
+            margin : 5px;
+        }
+
+        .operation-button {
+            background-color: grey;
+        }
+
+        .number-button {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <div id="display-container">
+            <div id="display">0</div>
+            <div id="ac-button">
+                <button id="ac-button" onclick="clearDisplay()">AC</button>
+            </div>
+        </div>
+        <div id="buttons">
+            <button class="number-button" onclick="appendToDisplay('7')">7</button>
+            <button class="number-button" onclick="appendToDisplay('8')">8</button>
+            <button class="number-button" onclick="appendToDisplay('9')">9</button>
+            <button class="operation-button" onclick="appendToDisplay('+')">+</button>
+            <button class="number-button" onclick="appendToDisplay('4')">4</button>
+            <button class="number-button" onclick="appendToDisplay('5')">5</button>
+            <button class="number-button" onclick="appendToDisplay('6')">6</button>
+            <button class="operation-button" onclick="appendToDisplay('-')">-</button>
+            <button class="number-button" onclick="appendToDisplay('1')">1</button>
+            <button class="number-button" onclick="appendToDisplay('2')">2</button>
+            <button class="number-button" onclick="appendToDisplay('3')">3</button>
+            <button class="operation-button" onclick="appendToDisplay('*')">*</button>
+            <button class="number-button" onclick="appendToDisplay('.')">.</button>
+            <button class="number-button" onclick="appendToDisplay('0')">0</button>
+            <button class="operation-button" onclick="calculateResult()">=</button>
+            <button class="operation-button" onclick="appendToDisplay('/')">/</button>
+        </div>
+    </div>
+
+    <script>
+        let displayValue = '0';
+
+        function updateDisplay() {
+            document.getElementById('display').textContent = displayValue;
+        }
+
+        function clearDisplay() {
+            displayValue = '0';
+            updateDisplay();
+        }
+
+        function appendToDisplay(value) {
+            if (displayValue === '0' && value !== '.') {
+                displayValue = value;
+            } else {
+                displayValue += value;
+            }
+            updateDisplay();
+        }
+
+        function calculateResult() {
+            try {
+                displayValue = eval(displayValue).toString();
+            } catch (error) {
+                displayValue = 'Error';
+            }
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
